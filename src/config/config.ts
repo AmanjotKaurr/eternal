@@ -3,19 +3,19 @@
 import { getDefaultConfig } from "@rainbow-me/rainbowkit";
 import { http } from "viem";
 import { createStorage } from "wagmi";
-import { berachain } from "wagmi/chains";
+import { berachainBepolia } from "wagmi/chains";
 
 const storage = createStorage({
   storage: typeof window !== "undefined" ? window.localStorage : undefined,
 });
 
 export const config = getDefaultConfig({
-  appName: "Cubhub",
+  appName: "Willify",
   projectId: "6b160afd8d190502aae8559c94e7d799",
-  chains: [berachain],
+  chains: [berachainBepolia],
   ssr: true, // If your dApp uses server side rendering (SSR)
   transports: {
-    [berachain.id]: http(),
+    [berachainBepolia.id]: http(),
   },
   storage,
   // Increase connection timeout
