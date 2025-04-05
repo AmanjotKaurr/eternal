@@ -1,5 +1,6 @@
 "use client";
 
+import { abi } from "@/abi/abi";
 import Header from "@/components/Header";
 import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react";
@@ -7,11 +8,9 @@ import { toast } from "sonner";
 import { Address } from "viem";
 import {
   useAccount,
-  useBalance,
   useWaitForTransactionReceipt,
   useWriteContract,
 } from "wagmi";
-import { abi } from "@/abi/abi";
 
 const Page = () => {
   const { address } = useAccount();

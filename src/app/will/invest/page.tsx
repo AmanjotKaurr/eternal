@@ -4,7 +4,7 @@ import { abi } from "@/abi/abi";
 import Header from "@/components/Header";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
-import { getEscrowInfo } from "@/utls/get-escrow";
+import { getEscrowInfo } from "@/utils/get-escrow";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -32,6 +32,7 @@ const Page = () => {
     charity: boolean;
     claimed: boolean;
   }>(null);
+  const [emailAddress, setEmailAddress] = useState("");
 
   const router = useRouter();
   console.log(time);
@@ -67,6 +68,10 @@ const Page = () => {
     }
     if (!time || new Date(time).getTime() <= Date.now()) {
       toast.error("Please select a future date");
+      return;
+    }
+    if (emailAddress.length < 3 || !emailAddress.includes("@")) {
+      toast.error("Please enter a valid email address");
       return;
     }
     const seconds = Math.floor(
@@ -144,6 +149,23 @@ const Page = () => {
         </span>
       );
       setLoading(false);
+      fetch("/api/send-mail", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ emailAddress }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success) {
+            toast.success("Email sent successfully");
+          } else {
+            toast.error("Email not sent");
+          }
+        })
+        .catch((err) => {
+          toast.error("Failed to send email");
+          console.error(err);
+        });
       router.refresh();
     }
 
@@ -200,13 +222,24 @@ const Page = () => {
         <div className="ml-15">
           <h1 className="text-4xl font-bold">Time-Locked Succession</h1>
           <h3 className="text-lg text-white/35">
-            Set up automatic transfer of funds if you don't check in regularly
+            Set up inheritance of your funds
           </h3>
         </div>
 
         {/* Create new escrow */}
-        <div className="max-h-[80vh] w-[80%] mx-auto bg-gray-500/30 border-white/15 rounded-md mt-6 p-10 mb-0">
-          <h1 className="text-2xl font-bold">Invest your funds</h1>
+        <div className="min-h-[80vh] w-[80%] mx-auto bg-gray-500/30 border-white/15 rounded-md mt-6 p-10 mb-0">
+          <h1 className="text-2xl font-bold">Inherit your funds</h1>
+
+          <div className="h-[10%] w-[90%] mt-10 mb-10">
+            <h1 className="text-md font-light">Email Address</h1>
+            <Input
+              className="py-6 mt-2"
+              type="text"
+              placeholder="Enter Email address"
+              value={emailAddress}
+              onChange={(e) => setEmailAddress(e.target.value)}
+            />
+          </div>
 
           <div className="h-[10%] w-[90%] mt-10 mb-10">
             <h1 className="text-md font-light">Beneficiary Address</h1>
@@ -263,14 +296,14 @@ const Page = () => {
             {loading ? (
               <div className="h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
             ) : (
-              "Create Switch"
+              "Create Will"
             )}{" "}
           </button>
         </div>
 
         {/* Your Escrows */}
         <div className="min-h-[20vh] w-[80%] mx-auto bg-gray-500/30 border-white/15 rounded-md mt-6 p-10">
-          <h1 className="text-2xl font-bold">Your Escrows</h1>
+          <h1 className="text-2xl font-bold">Your Wills</h1>
           {!escrowInfo ? (
             <h3 className="text-lg text-white/25 mt-5">No record found</h3>
           ) : (

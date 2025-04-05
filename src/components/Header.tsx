@@ -21,7 +21,7 @@ function Header() {
       <div className="h-[10vh] flex items-center justify-between px-20 py-10">
         <Link href="/" className="flex items-center gap-5">
           <h1 className={`text-6xl text-cyan-400 ${roadRage.className}`}>
-            WillyFi
+            WilliFy
           </h1>
         </Link>
 
