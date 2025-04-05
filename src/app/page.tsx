@@ -1,4 +1,5 @@
 import { Road_Rage } from "next/font/google";
+import Link from "next/link";
 
 const roadRage = Road_Rage({
   subsets: ["latin"],
@@ -15,14 +16,17 @@ export default function Home() {
         >
           WilliFy
         </h1>
-        <h3 className="text-center text-cyan-400 text-lg mt-4 max-w-[50vh] font-medium">
+        <h3 className="text-center text-white text-lg mt-4 max-w-[50vh] font-medium">
           The next generation of digital asset inheritance. Secure, automated,
           and decentralized on Ethereum.
         </h3>
 
-        <button className="px-10 py-3 bg-violet-500 text-white mt-3 rounded-md cursor-pointer font-bold">
-          Connect
-        </button>
+        <Link
+          href={"/will/claim"}
+          className="px-10 py-3 bg-transparent border-2 border-cyan-400 text-cyan-400 mt-3 rounded-md cursor-pointer font-bold"
+        >
+          Start
+        </Link>
       </div>
 
       <div className="flex gap-0 mt-[8%] flex-wrap justify-center">
@@ -48,7 +52,7 @@ export default function Home() {
             </span>
           </div>
           <p className="text-sm text-zinc-300 max-w-xs relative z-10 px-10">
-            Built on Solana, the most secure blockchain
+            Built on Ethereum, the most secure blockchain
           </p>
         </div>
 
