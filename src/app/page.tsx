@@ -1,15 +1,19 @@
-import Image from "next/image";
-import { ShootingStars } from "@/components/ui/shooting-stars";
-import { StarsBackground } from "@/components/ui/stars-background";
+import { Road_Rage } from "next/font/google";
 
+const roadRage = Road_Rage({
+  subsets:["latin"],
+  weight:"400",
+  variable:"--font-road-rage"
+})
 export default function Home() {
   return (
-    <div className="min-h-screen w-screen bg-zinc-900">
+    <div className="min-h-screen w-screen bg-zinc-900 bg-[url(/bg.gif)] bg-cover bg-center">
+      
       <div className="flex flex-col items-center justify-center h-full">
-        <h1 className="text-8xl font-bold mt-[14%]">WilliFy</h1>
-        <h3 className="text-center text-lg mt-4 max-w-[50vh] font-medium">
+        <h1 className={`text-8xl font-bold mt-[14%] text-cyan-400 ${roadRage.className}`}>WilliFy</h1>
+        <h3 className="text-center text-cyan-400 text-lg mt-4 max-w-[50vh] font-medium">
           The next generation of digital asset inheritance. Secure, automated,
-          and decentralized on Etherium.
+          and decentralized on Ethereum.
         </h3>
 
         <button className="px-10 py-3 bg-violet-500 text-white mt-3 rounded-md cursor-pointer font-bold">
@@ -18,9 +22,9 @@ export default function Home() {
       </div>
 
       <div className="flex gap-0 mt-[8%] flex-wrap justify-center">
-        <div className="flex flex-col lg:border-r py-10 relative group/feature lg:border-l lg:border-b border-zinc-800">
+        <div className="flex flex-col lg:border-r py-10 relative group/feature lg:border-l lg:border-b border-white/35">
           <div className="opacity-0 group-hover/feature:opacity-100 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-t from-blue-500/20 to-transparent pointer-events-none"></div>
-          <div className="mb-4 relative z-10 px-10 text-blue-400 [&>svg]:w-8 [&>svg]:h-8">
+          <div className="mb-4 relative z-10 px-10 text-blue-400 [&>svg]:w-8 [&>svg]:h-8 ">
             <img
               alt="Solana Logo"
               loading="lazy"
@@ -45,7 +49,7 @@ export default function Home() {
         </div>
 
         {/* Security Section 2 */}
-        <div className="flex flex-col lg:border-r py-10 relative group/feature lg:border-l lg:border-b border-zinc-800">
+        <div className="flex flex-col lg:border-r py-10 relative group/feature lg:border-l lg:border-b border-white/35">
           <div className="opacity-0 group-hover/feature:opacity-100 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-t from-blue-500/20 to-transparent pointer-events-none"></div>
           <div className="mb-4 relative z-10 px-10 text-blue-400 [&>svg]:w-8 [&>svg]:h-8">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="tabler-icon tabler-icon-target "><path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path><path d="M12 12m-5 0a5 5 0 1 0 10 0a5 5 0 1 0 -10 0"></path><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path></svg>
@@ -62,7 +66,7 @@ export default function Home() {
         </div>
 
         {/* Security Section 3 */}
-        <div className="flex flex-col lg:border-r py-10 relative group/feature lg:border-l lg:border-b border-zinc-800">
+        <div className="flex flex-col lg:border-r py-10 relative group/feature lg:border-l lg:border-b border-white/35">
           <div className="opacity-0 group-hover/feature:opacity-100 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-t from-blue-500/20 to-transparent pointer-events-none"></div>
           <div className="mb-4 relative z-10 px-10 text-blue-400 [&>svg]:w-8 [&>svg]:h-8">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="tabler-icon tabler-icon-clock "><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path><path d="M12 7v5l3 3"></path></svg>
@@ -79,7 +83,7 @@ export default function Home() {
         </div>
 
         {/* Security Section 4 */}
-        <div className="flex flex-col lg:border-r py-10 relative group/feature lg:border-l lg:border-b border-zinc-800">
+        <div className="flex flex-col lg:border-r py-10 relative group/feature lg:border-l lg:border-b border-white/35">
           <div className="opacity-0 group-hover/feature:opacity-100 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-t from-blue-500/20 to-transparent pointer-events-none"></div>
           <div className="mb-4 relative z-10 px-10 text-blue-400 [&>svg]:w-8 [&>svg]:h-8">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="tabler-icon tabler-icon-wallet w-8 h-8"><path d="M17 8v-3a1 1 0 0 0 -1 -1h-10a2 2 0 0 0 0 4h12a1 1 0 0 1 1 1v3m0 4v3a1 1 0 0 1 -1 1h-12a2 2 0 0 1 -2 -2v-12"></path><path d="M20 12v4h-4a2 2 0 0 1 0 -4h4"></path></svg>
@@ -96,8 +100,6 @@ export default function Home() {
         </div>
       </div>
 
-      <ShootingStars />
-      <StarsBackground />
     </div>
   );
 }
