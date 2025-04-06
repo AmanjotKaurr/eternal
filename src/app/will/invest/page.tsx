@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { getEscrowInfo } from "@/utils/get-escrow";
+import { Road_Rage } from "next/font/google";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -15,6 +16,12 @@ import {
   useWaitForTransactionReceipt,
   useWriteContract,
 } from "wagmi";
+
+const roadRage = Road_Rage({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-road-rage",
+});
 
 const Page = () => {
   const { address } = useAccount();
@@ -214,129 +221,138 @@ const Page = () => {
   }, [address]);
 
   return (
-    <div className="min-h-screen w-screen bg-zinc-900 p-4 pt-0 text-white bg-[url(/bg.gif)] bg-cover bg-center">
-      <Header />
+    <>
+      <div className="block xl:hidden h-screen w-screen bg-zinc-900 p-4 text-white bg-[url(/bg.gif)] bg-cover bg-center">
+        <h1
+          className={`block xl:hidden text-8xl text-center self-center font-bold mt-[14%] text-cyan-400 ${roadRage.className}`}
+        >
+          Coming Soon on Small Screens
+        </h1>
+      </div>
+      <div className="hidden xl:block min-h-screen w-screen bg-zinc-900 p-4 pt-0 text-white bg-[url(/bg.gif)] bg-cover bg-center">
+        <Header />
 
-      {/* Main Content */}
-      <div className="min-h-screen w-[80%] border border-white/15 rounded-md m-8 mx-auto p-10">
-        <div className="ml-15">
-          <h1 className="text-4xl font-bold">Time-Locked Succession</h1>
-          <h3 className="text-lg text-white/35">
-            Set up inheritance of your funds
-          </h3>
-        </div>
-
-        {/* Create new escrow */}
-        <div className="min-h-[80vh] w-[80%] mx-auto bg-gray-500/30 border-white/15 rounded-md mt-6 p-10 mb-0">
-          <h1 className="text-2xl font-bold">Inherit your funds</h1>
-
-          <div className="h-[10%] w-[90%] mt-10 mb-10">
-            <h1 className="text-md font-light">Email Address</h1>
-            <Input
-              className="py-6 mt-2"
-              type="text"
-              placeholder="Enter Email address"
-              value={emailAddress}
-              onChange={(e) => setEmailAddress(e.target.value)}
-            />
+        {/* Main Content */}
+        <div className="min-h-screen w-[80%] border border-white/15 rounded-md m-8 mx-auto p-10">
+          <div className="ml-15">
+            <h1 className="text-4xl font-bold">Time-Locked Succession</h1>
+            <h3 className="text-lg text-white/35">
+              Set up inheritance of your funds
+            </h3>
           </div>
 
-          <div className="h-[10%] w-[90%] mt-10 mb-10">
-            <h1 className="text-md font-light">Beneficiary Address</h1>
-            <Input
-              className="py-6 mt-2"
-              type="text"
-              placeholder="Enter Ethereum address"
-              value={receiverAddress}
-              onChange={(e) => setReceiverAddress(e.target.value)}
-            />
-          </div>
+          {/* Create new escrow */}
+          <div className="min-h-[80vh] w-[80%] mx-auto bg-gray-500/30 border-white/15 rounded-md mt-6 p-10 mb-0">
+            <h1 className="text-2xl font-bold">Inherit your funds</h1>
 
-          <div className="h-[10%] w-[90%] mt-10">
-            <h1 className="text-md font-light">Amount (ETH)</h1>
-            <Input
-              className="py-6 mt-2"
-              type="number"
-              placeholder="Enter amount"
-              value={amount}
-              onChange={(e) => setAmount(Number(e.target.value))}
-            />
-          </div>
-
-          <div className="h-[10%] w-[90%] mt-10">
-            <h1 className="text-md font-light mb-2">Select Deadline Date</h1>
-            <input
-              type="date"
-              value={time}
-              onChange={(e) => setTime(e.target.value)}
-            />
-          </div>
-
-          <div className="h-[10%] w-[40%] mt-10">
-            <div className="flex items-center space-x-2">
-              <Checkbox
-                id="charity"
-                checked={donateToCharity}
-                onCheckedChange={() => setDonateToCharity((prv) => !prv)}
+            <div className="h-[10%] w-[90%] mt-10 mb-10">
+              <h1 className="text-md font-light">Email Address</h1>
+              <Input
+                className="py-6 mt-2"
+                type="text"
+                placeholder="Enter Email address"
+                value={emailAddress}
+                onChange={(e) => setEmailAddress(e.target.value)}
               />
-              <label
-                htmlFor="charity"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              >
-                Donate to charity
-              </label>
             </div>
+
+            <div className="h-[10%] w-[90%] mt-10 mb-10">
+              <h1 className="text-md font-light">Beneficiary Address</h1>
+              <Input
+                className="py-6 mt-2"
+                type="text"
+                placeholder="Enter Ethereum address"
+                value={receiverAddress}
+                onChange={(e) => setReceiverAddress(e.target.value)}
+              />
+            </div>
+
+            <div className="h-[10%] w-[90%] mt-10">
+              <h1 className="text-md font-light">Amount (ETH)</h1>
+              <Input
+                className="py-6 mt-2"
+                type="number"
+                placeholder="Enter amount"
+                value={amount}
+                onChange={(e) => setAmount(Number(e.target.value))}
+              />
+            </div>
+
+            <div className="h-[10%] w-[90%] mt-10">
+              <h1 className="text-md font-light mb-2">Select Deadline Date</h1>
+              <input
+                type="date"
+                value={time}
+                onChange={(e) => setTime(e.target.value)}
+              />
+            </div>
+
+            <div className="h-[10%] w-[40%] mt-10">
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="charity"
+                  checked={donateToCharity}
+                  onCheckedChange={() => setDonateToCharity((prv) => !prv)}
+                />
+                <label
+                  htmlFor="charity"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  Donate to charity
+                </label>
+              </div>
+            </div>
+
+            <button
+              className="w-[90%] bg-gray-600 mt-8 h-[5vh] rounded-md text-white cursor-pointer flex items-center justify-center"
+              disabled={loading}
+              onClick={investFunds}
+            >
+              {loading ? (
+                <div className="h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+              ) : (
+                "Create Will"
+              )}{" "}
+            </button>
           </div>
 
-          <button
-            className="w-[90%] bg-gray-600 mt-8 h-[5vh] rounded-md text-white cursor-pointer flex items-center justify-center"
-            disabled={loading}
-            onClick={investFunds}
-          >
-            {loading ? (
-              <div className="h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+          {/* Your Escrows */}
+          <div className="min-h-[20vh] w-[80%] mx-auto bg-gray-500/30 border-white/15 rounded-md mt-6 p-10">
+            <h1 className="text-2xl font-bold">Your Wills</h1>
+            {!escrowInfo ? (
+              <h3 className="text-lg text-white/25 mt-5">No record found</h3>
             ) : (
-              "Create Will"
-            )}{" "}
-          </button>
-        </div>
-
-        {/* Your Escrows */}
-        <div className="min-h-[20vh] w-[80%] mx-auto bg-gray-500/30 border-white/15 rounded-md mt-6 p-10">
-          <h1 className="text-2xl font-bold">Your Wills</h1>
-          {!escrowInfo ? (
-            <h3 className="text-lg text-white/25 mt-5">No record found</h3>
-          ) : (
-            <div className="mt-5">
-              <h3 className="text-lg">
-                Beneficiary Address: {escrowInfo?.receiver}
-              </h3>
-              <h3 className="text-lg">Amount: {escrowInfo?.amount} ETH</h3>
-              <h3 className="text-lg">
-                Submission Time: {escrowInfo?.submissionTime}
-              </h3>
-              <h3 className="text-lg">
-                Charity: {escrowInfo?.charity ? "Yes" : "No"}
-              </h3>
-              <h3 className="text-lg">
-                Claimed: {escrowInfo?.claimed ? "Yes" : "No"}
-              </h3>
-              <button
-                className="bg-gray-600 h-[5vh] flex items-center justify-center p-4 rounded-md text-white cursor-pointer"
-                onClick={cancelFunds}
-                disabled={loading}
-              >
-                {loading ? (
-                  <div className="h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                ) : (
-                  "Cancel Will"
-                )}{" "}
-              </button>
-            </div>
-          )}
+              <div className="mt-5">
+                <h3 className="text-lg">
+                  Beneficiary Address: {escrowInfo?.receiver}
+                </h3>
+                <h3 className="text-lg">Amount: {escrowInfo?.amount} ETH</h3>
+                <h3 className="text-lg">
+                  Submission Time: {escrowInfo?.submissionTime}
+                </h3>
+                <h3 className="text-lg">
+                  Charity: {escrowInfo?.charity ? "Yes" : "No"}
+                </h3>
+                <h3 className="text-lg">
+                  Claimed: {escrowInfo?.claimed ? "Yes" : "No"}
+                </h3>
+                <button
+                  className="bg-gray-600 h-[5vh] flex items-center justify-center p-4 rounded-md text-white cursor-pointer"
+                  onClick={cancelFunds}
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <div className="h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  ) : (
+                    "Cancel Will"
+                  )}{" "}
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
