@@ -1,5 +1,11 @@
 import { Road_Rage } from "next/font/google";
 import Link from "next/link";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const roadRage = Road_Rage({
   subsets: ["latin"],
@@ -9,8 +15,13 @@ const roadRage = Road_Rage({
 
 export default function Home() {
   return (
-    <div className="min-h-screen w-screen bg-zinc-900 bg-[url(/bg.gif)] bg-cover bg-center">
-      <div className="flex flex-col items-center justify-center h-full">
+    <div className="min-h-screen w-screen bg-zinc-900 bg-[url(/bg.gif)] bg-cover bg-center flex flex-col items-center gap-24 py-8">
+      <h1
+        className={`block xl:hidden text-8xl self-center font-bold mt-[14%] text-cyan-400 ${roadRage.className}`}
+      >
+        Coming Soon on Small Screens
+      </h1>
+      <div className="hidden xl:flex flex-col items-center justify-center">
         <h1
           className={`text-8xl font-bold mt-[14%] text-cyan-400 ${roadRage.className}`}
         >
@@ -29,7 +40,7 @@ export default function Home() {
         </Link>
       </div>
 
-      <div className="flex gap-0 mt-[8%] flex-wrap justify-center">
+      <div className="hidden xl:flex gap-0 flex-wrap justify-center">
         <div className="flex flex-col lg:border-r py-10 relative group/feature lg:border-l lg:border-b border-white/35">
           <div className="opacity-0 group-hover/feature:opacity-100 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-t from-blue-500/20 to-transparent pointer-events-none"></div>
           <div className="mb-4 relative z-10 px-10 text-blue-400 [&>svg]:w-8 [&>svg]:h-8 ">
@@ -148,6 +159,52 @@ export default function Home() {
           <p className="text-sm text-zinc-300 max-w-xs relative z-10 px-10">
             Connect and manage multiple beneficiary wallets
           </p>
+        </div>
+      </div>
+
+      <div className="hidden xl:flex flex-col gap-8 w-[40%]">
+        <h2 className="text-white text-3xl">Frequently Asked Questions</h2>
+        <div className="flex flex-col gap-4 text-white w-full">
+          <Accordion type="single" collapsible>
+            <AccordionItem value="item-1">
+              <AccordionTrigger className="cursor-pointer">
+                How does Willify works?
+              </AccordionTrigger>
+              <AccordionContent>
+                Willify uses smart contracts on the Bepolia blockchain to create
+                a secure, automated inheritance system. You first set up an
+                escrow which stores your assets, and specify the transfer amount
+                along with a time period.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+          <Accordion type="single" collapsible className="cursor-pointer">
+            <AccordionItem value="item-1">
+              <AccordionTrigger className="cursor-pointer">
+                What happens to my assets?
+              </AccordionTrigger>
+              <AccordionContent>
+                Your assets remain securely locked in the smart contract until
+                you choose to cancel the escrow and withdraw them or the
+                receiver claims it. You maintain full control over your assets
+                while the will is active. Once the time is up, only the
+                beneficiary wallet can withdraw the assets.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+          <Accordion type="single" collapsible className="cursor-pointer">
+            <AccordionItem value="item-1">
+              <AccordionTrigger className="cursor-pointer">
+                Is this secure?
+              </AccordionTrigger>
+              <AccordionContent>
+                Yes, alot. Willify is built on Bepolia's blockchain, ensuring
+                maximum security and transparency. All transactions and rules
+                are enforced by smart contracts, making the process completely
+                trustless and automated.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </div>
       </div>
     </div>
